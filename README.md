@@ -4,7 +4,7 @@ Buscador y agregador web de libros antiguos, primeras ediciones y títulos desca
 
 ## ✨ Características
 
-- **Búsqueda precisa e independiente:** Filtrado por **Título**, **Autor**, **Editorial**, **Idioma** y **Rango de años de publicación** (1800–2026) conectando con la API de Open Library.
+- **Búsqueda precisa e independiente:** Filtrado por **Título**, **Autor**, **Editorial**, **Idioma** y **Rango de años de publicación** conectando con la API de Open Library.
 - **Filtro rápido en pantalla:** Desplegable dinámico que extrae todas las editoriales de los resultados obtenidos para filtrar al instante sin recargar ni volver a consultar la API.
 - **Lectura digital directa:**
   - Detección de obras en dominio público o con acceso digital abierto (`ebook_access: public` / pre-1929).
