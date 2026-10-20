@@ -26,7 +26,7 @@ Buscador y agregador web de libros antiguos, primeras ediciones y títulos desca
 
 1. Clonar el repositorio:
    ```bash
-   git clone [https://github.com/TomasdeSouza1/BookFinder.git]
+   git clone https://github.com/TomasdeSouza1/BookFinder.git
    cd BookFinder
    ```
 
