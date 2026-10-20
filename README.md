@@ -18,8 +18,8 @@ Buscador y agregador web de libros antiguos, primeras ediciones y títulos desca
 ## 🛠️ Tecnologías
 
 - **TypeScript** (Tipado estricto, interfaces para API y modelo de dominio)
-- **Vite** (Bundler y servidor de desarrollo ultrarrápido)
-- **HTML5 & CSS3** (Diseño responsive con CSS Grid y estética de librería clásica, sin dependencias externas)
+- **Vite** 
+- **HTML5 & CSS3** 
 - **Open Library Search API**
 
 ## 🚀 Instalación y uso local
