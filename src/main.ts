@@ -117,13 +117,21 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  const yearFrom = yearFromInput.value ? Number(yearFromInput.value) : undefined;
+  const yearTo = yearToInput.value ? Number(yearToInput.value) : undefined;
+
+  if (yearFrom !== undefined && yearTo !== undefined && yearFrom > yearTo) {
+    statusEl.textContent = "El 'Año desde' no puede ser mayor que el 'Año hasta'.";
+    return;
+  }
+
   const filters: SearchFilters = {
     title,
     author,
     publisher,
     language: languageSelect.value as LanguageFilter,
-    yearFrom: yearFromInput.value ? Number(yearFromInput.value) : undefined,
-    yearTo: yearToInput.value ? Number(yearToInput.value) : undefined,
+    yearFrom,
+    yearTo,
     onlyFreeReading: onlyFreeCheckbox.checked,
     sortBy: sortBySelect.value as SearchFilters["sortBy"],
   };

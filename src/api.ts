@@ -9,7 +9,19 @@ const BASE_URL = "https://openlibrary.org/search.json";
 
 function mapDocToBook(doc: OpenLibraryDoc): Book {
   const iaId = doc.ia?.[0];
-  const canReadOnline = Boolean(doc.has_fulltext && iaId);
+  const isPublicDomainYear =
+    doc.first_publish_year !== undefined && doc.first_publish_year <= 1929;
+  const canReadOnline = Boolean(
+    doc.ebook_access === "public" ||
+      doc.public_scan_b === true ||
+      isPublicDomainYear,
+  );
+
+  const editionPublishers =
+    doc.editions?.docs?.flatMap((ed) => ed.publisher ?? []) ?? [];
+  const allPublishers = [
+    ...new Set([...(doc.publisher ?? []), ...editionPublishers]),
+  ];
 
   return {
     id: doc.key,
@@ -17,15 +29,16 @@ function mapDocToBook(doc: OpenLibraryDoc): Book {
     authors: doc.author_name ?? ["Autor desconocido"],
     firstPublishYear: doc.first_publish_year ?? null,
     editionCount: doc.edition_count ?? 1,
-    publishers: doc.publisher ?? [],
+    publishers: allPublishers,
     languages: doc.language ?? [],
     coverUrl: doc.cover_i
       ? `https://covers.openlibrary.org/b/id/${doc.cover_i}-M.jpg`
       : null,
-    readOnlineUrl: canReadOnline ? `https://archive.org/details/${iaId}` : null,
+    readOnlineUrl: iaId ? `https://archive.org/details/${iaId}` : null,
     hasFullText: canReadOnline,
   };
 }
+
 export async function searchBooks(filters: SearchFilters): Promise<Book[]> {
   const queryParts: string[] = [];
 
@@ -35,17 +48,26 @@ export async function searchBooks(filters: SearchFilters): Promise<Book[]> {
   if (filters.author.trim() !== "") {
     queryParts.push(`author:"${filters.author.trim()}"`);
   }
-
   if (filters.publisher.trim() !== "") {
     queryParts.push(`publisher:"${filters.publisher.trim()}"`);
   }
   if (filters.language !== "all") {
     queryParts.push(`language:${filters.language}`);
   }
+  if (filters.yearFrom !== undefined || filters.yearTo !== undefined) {
+    const from = filters.yearFrom ?? 1800;
+    const to = filters.yearTo ?? 2026;
+    queryParts.push(`first_publish_year:[${from} TO ${to}]`);
+  }
+  if (filters.onlyFreeReading) {
+    queryParts.push(`(ebook_access:public OR first_publish_year:[1800 TO 1929])`);
+  }
 
   const params = new URLSearchParams({
     q: queryParts.join(" "),
     limit: "40",
+    fields:
+      "key,title,author_name,first_publish_year,edition_count,publisher,language,has_fulltext,public_scan_b,ebook_access,ia,cover_i,editions,editions.publisher",
   });
 
   if (filters.sortBy === "oldest") {

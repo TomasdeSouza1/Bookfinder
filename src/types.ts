@@ -40,8 +40,15 @@ export interface OpenLibraryDoc {
   publisher?: string[];
   language?: string[];
   has_fulltext?: boolean;
+  public_scan_b?: boolean;
+  ebook_access?: "public" | "borrowable" | "printdisabled" | "no_ebook";
   ia?: string[];
   cover_i?: number;
+  editions?: {
+    docs?: {
+      publisher?: string[];
+    }[];
+  };
 }
 
 export interface OpenLibraryResponse {
