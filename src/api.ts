@@ -27,7 +27,14 @@ function mapDocToBook(doc: OpenLibraryDoc): Book {
   };
 }
 export async function searchBooks(filters: SearchFilters): Promise<Book[]> {
-  const queryParts: string[] = [filters.query.trim()];
+  const queryParts: string[] = [];
+
+  if (filters.title.trim() !== "") {
+    queryParts.push(`title:"${filters.title.trim()}"`);
+  }
+  if (filters.author.trim() !== "") {
+    queryParts.push(`author:"${filters.author.trim()}"`);
+  }
 
   if (filters.publisher.trim() !== "") {
     queryParts.push(`publisher:"${filters.publisher.trim()}"`);
@@ -50,7 +57,7 @@ export async function searchBooks(filters: SearchFilters): Promise<Book[]> {
   const response = await fetch(`${BASE_URL}?${params.toString()}`);
 
   if (!response.ok) {
-    throw new Error(`Error al consultar Open Library: ${response.status}`);
+    throw new Error(`Error al consultar: ${response.status}`);
   }
 
   const data: OpenLibraryResponse = await response.json();

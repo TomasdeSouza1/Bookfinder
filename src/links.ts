@@ -1,6 +1,7 @@
 import type { Book } from "./types";
 
 export interface StoreLinks {
+  readPdf: string;
   iberlibro: string;
   todocoleccion: string;
   mercadolibre: string;
@@ -12,12 +13,15 @@ export function generateStoreLinks(book: Book): StoreLinks {
   const rawSearchTerms = `${book.title} ${mainAuthor}`.trim();
 
   const encodedQuery = encodeURIComponent(rawSearchTerms);
-  const mlSlug = encodeURIComponent(rawSearchTerms.replace(/\s+/g, "-"));
+  const pdfQuery = encodeURIComponent(
+    `"${book.title}" "${mainAuthor}" filetype:pdf`,
+  );
 
   return {
+    readPdf: `https://www.google.com/search?q=${pdfQuery}`,
     iberlibro: `https://www.iberlibro.com/servlet/SearchResults?kn=${encodedQuery}`,
     todocoleccion: `https://www.todocoleccion.net/buscador?bu=${encodedQuery}`,
-    mercadolibre: `https://listado.mercadolibre.com.ar/${mlSlug}#D[A:${encodedQuery}]`,
+    mercadolibre: `https://www.google.com/search?q=site:mercadolibre.com.ar+${encodedQuery}`,
     buscalibre: `https://www.buscalibre.com/libros/search?q=${encodedQuery}`,
   };
 }

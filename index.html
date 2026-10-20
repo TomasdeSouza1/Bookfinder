@@ -1,13 +1,120 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BookFinder</title>
+    <title>BookFinder — Buscador de Libros Viejos y Descatalogados</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <header class="app-header">
+        <h1>BookFinder</h1>
+        <p>Buscador de libros antiguos, primeras ediciones y lectura libre</p>
+      </header>
+
+      <main class="container">
+        <form id="search-form" class="search-panel">
+          <div class="filters-grid">
+            <div class="field-group">
+              <label for="title">Título</label>
+              <input
+                type="text"
+                id="title"
+                placeholder="Ej: El Aleph, Rayuela..."
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="author">Autor</label>
+              <input
+                type="text"
+                id="author"
+                placeholder="Ej: Borges, Julio Verne..."
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="publisher">Editorial (búsqueda)</label>
+              <input
+                type="text"
+                id="publisher"
+                placeholder="Ej: Minotauro, Sudamericana..."
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="language">Idioma</label>
+              <select id="language">
+                <option value="all">Todos los idiomas</option>
+                <option value="spa">Español</option>
+                <option value="eng">Inglés</option>
+                <option value="fre">Francés</option>
+                <option value="por">Portugués</option>
+                <option value="ita">Italiano</option>
+                <option value="ger">Alemán</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="year-from">Año desde</label>
+              <input
+                type="number"
+                id="year-from"
+                placeholder="Ej: 1850"
+                min="1000"
+                max="2030"
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="year-to">Año hasta</label>
+              <input
+                type="number"
+                id="year-to"
+                placeholder="Ej: 1950"
+                min="1000"
+                max="2030"
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="sort-by">Ordenar por</label>
+              <select id="sort-by">
+                <option value="oldest">Más antiguos primero</option>
+                <option value="newest">Más recientes primero</option>
+                <option value="relevance">Relevancia</option>
+              </select>
+            </div>
+
+            <div class="field-group checkbox-group">
+              <label for="only-free">
+                <input type="checkbox" id="only-free" />
+                Solo disponibles para leer online
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit">Buscar libros</button>
+        </form>
+
+        <section class="toolbar">
+          <p id="status" class="status-text">
+            Ingresá una búsqueda para comenzar.
+          </p>
+          <div class="quick-filter">
+            <label for="quick-publisher"
+              >Filtrar resultados por editorial:</label
+            >
+            <select id="quick-publisher" disabled>
+              <option value="">Todas las editoriales (0)</option>
+            </select>
+          </div>
+        </section>
+
+        <section id="results" class="results-grid"></section>
+      </main>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

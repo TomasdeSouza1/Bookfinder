@@ -21,7 +21,8 @@ export interface Book {
 }
 
 export interface SearchFilters {
-  query: string;
+  title: string;
+  author: string;
   publisher: string;
   language: LanguageFilter;
   yearFrom?: number;
