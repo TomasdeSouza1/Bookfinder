@@ -17,7 +17,7 @@ Buscador y agregador web de libros antiguos, primeras ediciones y títulos desca
 
 ## 🛠️ Tecnologías
 
-- **TypeScript** (Tipado estricto, interfaces para API y modelo de dominio)
+- **TypeScript** (interfaces para API y modelo de dominio)
 - **Vite** 
 - **HTML5 & CSS3** 
 - **Open Library Search API**
