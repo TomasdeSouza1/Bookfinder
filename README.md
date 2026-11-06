@@ -7,8 +7,8 @@ Buscador y agregador web de libros antiguos, primeras ediciones y títulos desca
 - **Búsqueda precisa e independiente:** Filtrado por **Título**, **Autor**, **Editorial**, **Idioma** y **Rango de años de publicación** conectando con la API de Open Library.
 - **Filtro rápido en pantalla:** Desplegable dinámico que extrae todas las editoriales de los resultados obtenidos para filtrar al instante sin recargar ni volver a consultar la API.
 - **Lectura digital directa:**
-  - Detección de obras en dominio público o con acceso digital abierto (`ebook_access: public` / pre-1929).
-  - Botón directo para buscar y abrir el **PDF completo** en el visor del navegador (`filetype:pdf`).
+  - Detección de obras en dominio público o con acceso digital.
+  - Botón directo para buscar y abrir el **PDF completo** en el visor del navegador .
 - **Compra física en 1 clic:** Generación automática de enlaces de búsqueda hacia librerías especializadas en libros usados, antiguos y de catálogo:
   - **IberLibro**
   - **Todocoleccion**
